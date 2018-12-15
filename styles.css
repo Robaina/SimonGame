@@ -1,0 +1,120 @@
+body, html {
+    min-height: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 1);
+}
+.button {
+  padding: 1vmax;
+  font-size: 2.5vmax;
+  width: 14vmax;
+  background-color: rgb(12, 165, 170);
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  margin: 1em 0em;
+  cursor: pointer;
+  border-radius: 1vmax;
+  user-select: none;
+  outline: none;
+  box-shadow: 0 0.5vmax rgb(221, 221, 221);
+}
+.button:active {
+  box-shadow: 0 0.3vmax rgb(102, 102, 102);
+  transform: translateY(4px);
+}
+#drum1-button {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+}
+#drum2-button {
+  position: absolute;
+  left: 30%;
+  top: 50%;
+}
+#plate1-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+#plate2-button {
+  position: absolute;
+  left: 70%;
+  top: 50%;
+}
+#voice1-button {
+  position: absolute;
+  left: 10%;
+  top: 30%;
+}
+#voice2-button {
+  position: absolute;
+  left: 30%;
+  top: 30%;
+}
+#tick-button {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+}
+#applause-button {
+  position: absolute;
+  left: 70%;
+  top: 30%;
+}
+#full-screen {
+  position: relative;
+  top: 0em;
+  left: 0%;
+  border-top: 1em;
+  background-color: rgb(159, 159, 159);
+}
+.ring {
+    border: 2vh solid rgb(159, 159, 159);
+    border-radius: 10vmax;
+    height:9vh;
+    width:9vh;
+    position: absolute;
+    top: 90vh;
+    background-color: rgba(255, 255, 255, 0);
+    user-select: none;
+    outline: none;
+    visibility: hidden;
+}
+.ring:active, .ring:hover {
+  border: 2.1vh solid rgb(12, 165, 170);
+}
+
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out
+}
+
+@keyframes octocat-wave {
+  0%, 100% {
+    transform: rotate(0)
+  }
+
+  20%, 60% {
+    transform: rotate(-25deg)
+  }
+
+  40%, 80% {
+    transform: rotate(10deg)
+  }
+}
+
+@media (max-width:500px) {
+  .github-corner:hover .octo-arm {
+    animation: none
+  }
+
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out
+  }
+}
