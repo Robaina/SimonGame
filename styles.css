@@ -6,72 +6,73 @@ body, html {
     overflow: hidden;
     background-color: rgba(0, 0, 0, 1);
 }
-.button {
-  position: absolute;
-  padding: 2%;
-  font-size: 1.5em;
-  width: 30%;
-  height: 20%;
-  background-color: rgb(12, 165, 170);
-  border: none;
-  color: rgb(77, 77, 77);
-  text-align: center;
-  text-decoration: none;
-  display: inline-grid;
-  margin: none;
-  cursor: pointer;
-  border-radius: 25%;
-  user-select: none;
-  outline: none;
-  box-shadow: 0 0.3em rgb(221, 221, 221);
-}
-.button:active {
-  box-shadow: 0 0.35em rgb(102, 102, 102);
-  transform: translateY(4px);
-  animation-name: brightness;
-  animation-duration: 0.5s;
-}
-@keyframes brightness {
-0% {filter: brightness(100%);}
-50% {filter: brightness(150%);}
-100% {filter: brightness(100%);}
-}
 .button-container {
   position: absolute;
   top: 35%;
   left: 30%;
   width: 50%;
   height: 50%;
-  background-color: 'white';
+  background-color: inherit;
+}
+.button {
+  position: absolute;
+  padding: 0%;
+  width: 10em;
+  height: 10em;
+  background-color: inherit;
+
+  border-top-right-radius: 10em;
+  border: 6em solid gray;
+  border-bottom: 0;
+  border-left: 0;
+
+  display: inline-grid;
+  margin: none;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+.button:active {
+  animation-name: brightness;
+  animation-duration: 0.5s;
+}
+@keyframes brightness {
+0% {filter: brightness(100%);}
+50% {filter: brightness(350%);}
+100% {filter: brightness(100%);}
 }
 #up {
-  left: 30%;
-  top: 5%;
-  background-color: rgb(85, 198, 87);
+  left: 39.9%;
+  top: 3.7%;
+  border-color: rgb(85, 198, 87);
+  transform:rotate(-45deg);
 }
 #down {
-  left: 30%;
-  top: 55%;
-  background-color: rgb(15, 151, 186);
+  left: 40%;
+  top: 46%;
+  border-color: rgb(15, 151, 186);
+  transform:rotate(135deg);
 }
 #left {
-  left: 0%;
-  top: 30%;
-  background-color: rgb(191, 196, 57);
+  left: 14.5%;
+  top: 25%;
+  border-color: rgb(191, 196, 57);
+  transform:rotate(-135deg);
 }
 #right {;
-  left: 60%;
-  top: 30%;
-  background-color: rgb(190, 35, 35);
+  left: 65.5%;
+  top: 25%;
+  border-color: rgb(190, 35, 35);
+  transform:rotate(45deg);
 }
 .ring {
-    border: 2vh solid rgb(159, 159, 159);
+    border: 2em solid rgb(159, 159, 159);
     border-radius: 10vmax;
-    height:9vh;
-    width:9vh;
+    height: 7.5em;
+    width: 7.5em;
     position: absolute;
-    top: 32%;
-    left: 34%;
+    top: 28.5%;
+    left: 44.5%;
     background-color: rgba(255, 255, 255, 0);
     user-select: none;
     outline: none;
@@ -81,16 +82,34 @@ body, html {
   animation-name: brightness;
   animation-duration: 0.5s;
 }
-#full-screen {
+.full-screen {
+  padding: 1vmax;
+  font-size: 2.5vmax;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  margin: 1em 0em;
+  cursor: pointer;
+  border-radius: 1vmax;
+  user-select: none;
+  outline: none;
+  box-shadow: 0 0.5vmax rgb(221, 221, 221);
+
   position: relative;
   top: 0em;
   left: 0%;
-  width: 20%;
-  height: 8%;
+  width: 15vw;
+  height: 5vw;
   border-top: 1em;
   background-color: rgb(159, 159, 159);
 }
-
+.full-screen:active {
+  box-shadow: 0 0.3vmax rgb(102, 102, 102);
+  background-color: rgb(12, 165, 170);
+  transform: translateY(4px);
+}
 
 .github-corner:hover .octo-arm {
   animation: octocat-wave 560ms ease-in-out

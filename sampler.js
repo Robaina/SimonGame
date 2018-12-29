@@ -90,7 +90,7 @@ function checkOrder(event) {
       if (event.target.id !== buttonID) {
         chimp.play();
       } else {correct_counts++}
-      
+
     } else {
       pressedStart = false;
       console.log(correct_counts, numberOfBits);
