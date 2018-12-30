@@ -17,20 +17,20 @@
 
 <body>
 
-	<audio id="drum1">
-	  <source src="sounds/Drum1.mp3" type="audio/mpeg">
+	<audio id="Sound1">
+	  <source src="sounds/simonSound1.mp3" type="audio/mpeg">
 	  Your browser does not support the audio element.
 	</audio>
-	<audio id="drum2">
-		<source src="sounds/Drum2.mp3" type="audio/mpeg">
+	<audio id="Sound2">
+		<source src="sounds/simonSound2.mp3" type="audio/mpeg">
 		Your browser does not support the audio element.
 	</audio>
-	<audio id="plate1">
-		<source src="sounds/Plate1.mp3" type="audio/mpeg">
+	<audio id="Sound3">
+		<source src="sounds/simonSound3.mp3" type="audio/mpeg">
 		Your browser does not support the audio element.
 	</audio>
-	<audio id="plate2">
-		<source src="sounds/Plate2.mp3" type="audio/mpeg">
+	<audio id="Sound4">
+		<source src="sounds/simonSound4.mp3" type="audio/mpeg">
 		Your browser does not support the audio element.
 	</audio>
 	<audio id="chimp">
@@ -39,15 +39,17 @@
 	</audio>
 
 	<div class="button-container">
-		<button class="button" id="up" onclick="playDrum1()" ontouch="playDrum1()"></button>
+		<button class="button" id="up" onclick="playSound1()" ontouch="playSound1()"></button>
 
-		<button class="button" id="down" onclick="playDrum2()" ontouch="playDrum2()"></button>
+		<button class="button" id="down" onclick="playSound2()" ontouch="playSound2()"></button>
 
-		<button class="button" id="left" onclick="playPlate1()" ontouch="playPlate1()"></button>
+		<button class="button" id="left" onclick="playSound3()" ontouch="playSound3()"></button>
 
-		<button class="button" id="right" onclick="playPlate2()" ontouch="playPlate2()"></button>
+		<button class="button" id="right" onclick="playSound4()" ontouch="playSound4()"></button>
 
-		<button class="ring" id="start" onclick="playSoundSequence()" ontouch="playSoundSequence()"></button>
+		<button class="circle" id="circle">Simon</button>
+
+		<button class="start-button" id="start" onclick="playSoundSequence()" ontouch="playSoundSequence()"></button>
 	</div>
 
 	<button class="full-screen" id="full-screen" onclick="openFullscreen()" ontouch="openFullscreen()">Fullscreen</button>
