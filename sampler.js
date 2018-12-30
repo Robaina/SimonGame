@@ -10,6 +10,7 @@ let Sound4 = document.getElementById("Sound4");
 let chimp = document.getElementById("chimp");
 let fullScreen = false;
 let numberOfBits = 6;
+let maximumNumberOfBits = 20;
 let counter, button_sequence;
 let pressedStart = false;
 let buttonIDs = ["up", "down", "left", "right"];
