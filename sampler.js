@@ -7,14 +7,18 @@ let Sound1 = document.getElementById("Sound1");
 let Sound2 = document.getElementById("Sound2");
 let Sound3 = document.getElementById("Sound3");
 let Sound4 = document.getElementById("Sound4");
-let chimp = document.getElementById("chimp");
-let fullScreen = false;
-let numberOfBits = 6;
-let maximumNumberOfBits = 20;
+let wrong = document.getElementById("wrong");
+let numberOfBeats = 6;
+let maximumNumberOfBeats = 10;
+let numberOfPlayedBeats = 1;
 let counter, button_sequence;
 let pressedStart = false;
-let buttonIDs = ["up", "down", "left", "right"];
+let isOff = false;
+let buttonIDs = ["up", "right", "down", "left"];
 let strict = false;
+let counterButton = document.getElementById("counter");
+let startButton = document.getElementById("start");
+let strictButton = document.getElementById("strict");
 
 let buttons = {};
 for(let id of buttonIDs) {
@@ -26,12 +30,12 @@ for(let id of buttonIDs) {
 
 function playStrict() {
   strict = !strict;
-  let strictButton = document.getElementById("strict");
   if (strict) {
     strictButton.style.filter = "brightness(140%)";
   } else {
     strictButton.style.filter = "brightness(100%)";
   }
+  playWinTheme();
 }
 
 function playSound1() {
@@ -67,29 +71,84 @@ function playSound4() {
   }, 500);
 }
 
+function lightUpButtons(IDs, delay=500){
+  if(!Array.isArray(IDs)){IDs = [IDs]}
+
+  for (let id of IDs) {
+    buttons[id].style.filter = "brightness(250%)";
+  }
+  setTimeout(function() {
+    for (let id of IDs) {
+      buttons[id].style.filter = "brightness(100%)";
+    }
+  }, delay);
+}
+
 let playSound = {"up": playSound1, "down": playSound2, "left": playSound3, "right": playSound4};
 
-// Select a sequence randomly
-function playSoundSequence() {
-  pressedStart = true;
-  let index_sequence = sampleWithRepetition(0, 3, numberOfBits);
-  button_sequence = [];
-
-  for (let index of index_sequence) {
-    button_sequence.push(buttonIDs[index]);
+function initializeSimon() {
+  isOff = !isOff;
+  if (isOff) {
+    let updown = ["up", "down"];
+    let rightleft = ["right", "left"];
+    let sequence = buttonIDs.concat(buttonIDs).concat(buttonIDs).concat(
+      [updown, rightleft, updown, rightleft, "all"]);
+    let delay = 0;
+    counterButton.innerHTML = "--";
+    for (let i=0; i<sequence.length;i++){
+      setTimeout(function() {
+        id = sequence[i];
+        if (id === "all") {
+          lightUpButtons(buttonIDs, 1000);
+          counterButton.innerHTML = "0";
+        } else {
+          lightUpButtons(id, 100);
+        }
+      }, delay);
+      delay += 200;
+    }
+  } else {
+    turnOffSimon();
   }
+}
 
+function turnOffSimon() {
+  counterButton.innerHTML = "--";
+  setTimeout(function() {
+    counterButton.innerHTML = "";
+  }, 1000);
+  strictButton.style.filter = "brightness(100%)";
+  startButton.style.filter = "brightness(100%)";
+}
+
+function startGame() {
+  startButton.style.filter = "brightness(140%)";
+  button_sequence = getRandomButtonSequence(maximumNumberOfBeats);
+  updateCounter(0);
+  playSoundSequence(numberOfPlayedBeats);
+
+}
+
+// Select a sequence randomly
+function playSoundSequence(n_beats) {
+  pressedStart = true;
   let delay = 0;
   counter = 0;
-  for (let id of button_sequence) {
 
+  for (let i=0; i<n_beats; i++) {
+    let id = button_sequence[i];
     setTimeout(function() {
       playSound[id]();
       counter++;
+      updateCounter(counter);
     }, delay);
 
-    delay += 800;
+    delay += 600;
   }
+}
+
+function updateCounter(counter) {
+  counterButton.innerHTML = counter.toString();
 }
 
 function checkOrder(event) {
@@ -101,56 +160,77 @@ function checkOrder(event) {
     if (typeof buttonID !== "undefined") {
 
       if (event.target.id !== buttonID) {
-        chimp.play();
+        playWrong();
       } else {correct_counts++}
 
     } else {
       pressedStart = false;
-      console.log(correct_counts, numberOfBits);
-      if (correct_counts === numberOfBits) {Sound4.play()}
+      if (correct_counts === numberOfBeats) {Sound4.play()}
     }
 
 
   }
 }
 
-function sampleWithRepetition(minInt=0, maxInt=3, size=4) {
+function playWinTheme() {
+  let sequence = ["right", "down", "up", "left"];
+  let delay_times = [0, 200, 400, 600];
+  for (let i=0; i<sequence.length; i++) {
+    setTimeout(function() {
+      playSound[sequence[i]]();
+    }, delay_times[i]);
+  }
+}
+
+function playWrong() {
+  lightUpButtons(buttonIDs, 700);
+  wrong.play();
+}
+
+function getRandomButtonSequence(size) {
   let randomSample = [];
+  let button_sequence = [];
   let randomInt;
+  let minInt = 0;
+  let maxInt = 3;
 
   for (let i = 0; i < size; i++) {
     randomInt = Math.round((maxInt - minInt) * Math.random() + minInt);
     randomSample.push(randomInt);
   }
-  return randomSample
-}
 
-function openFullscreen() {
-  fullScreen = !fullScreen;
-  fullScreenButton = document.getElementById("full-screen");
-  let elem = document.documentElement;
-
-  if (fullScreen) {
-    fullScreenButton.style["background-color"] = "rgb(12, 165, 170)";
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) {
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen();
-    }
-  } else {
-    fullScreenButton.style["background-color"] = "rgb(159, 159, 159)";
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-    } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-    }
+  for (let index of randomSample) {
+    button_sequence.push(buttonIDs[index]);
   }
+  return button_sequence
 }
+
+// function openFullscreen() {
+//   fullScreen = !fullScreen;
+//   fullScreenButton = document.getElementById("full-screen");
+//   let elem = document.documentElement;
+//
+//   if (fullScreen) {
+//     fullScreenButton.style["background-color"] = "rgb(12, 165, 170)";
+//     if (elem.requestFullscreen) {
+//       elem.requestFullscreen();
+//     } else if (elem.mozRequestFullScreen) {
+//       elem.mozRequestFullScreen();
+//     } else if (elem.webkitRequestFullscreen) {
+//       elem.webkitRequestFullscreen();
+//     } else if (elem.msRequestFullscreen) {
+//       elem.msRequestFullscreen();
+//     }
+//   } else {
+//     fullScreenButton.style["background-color"] = "rgb(159, 159, 159)";
+//     if (document.exitFullscreen) {
+//         document.exitFullscreen();
+//     } else if (document.webkitExitFullscreen) {
+//         document.webkitExitFullscreen();
+//     } else if (document.mozCancelFullScreen) {
+//         document.mozCancelFullScreen();
+//     } else if (document.msExitFullscreen) {
+//         document.msExitFullscreen();
+//     }
+//   }
+// }
