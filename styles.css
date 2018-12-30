@@ -42,10 +42,6 @@ p {
   outline: none;
   z-index: 0;
 }
-.button:active {
-  filter: brightness(250%);
-  outline:none;
-}
 #up {
   left: 25%;
   top: -10%;
@@ -132,7 +128,7 @@ p {
 #start-text {
   position: absolute;
   top: 15%;
-  left: 42%;
+  left: 47%;
 }
 #strict {
   top: 45%;
@@ -149,6 +145,7 @@ p {
   height: 35%;
   top: 42%;
   left: 0%;
+  border: 0;
   background-color: rgb(48, 48, 48);
   border-radius: 10%;
   font-family: "digital-font";
@@ -159,6 +156,7 @@ p {
   outline: none;
   margin: 0;
   padding: 0;
+  z-index: 1;
 }
 #counter-text {
   position: absolute;

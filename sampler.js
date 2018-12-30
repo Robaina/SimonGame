@@ -13,12 +13,13 @@ let maximumNumberOfBeats = 10;
 let numberOfPlayedBeats = 1;
 let counter, button_sequence;
 let pressedStart = false;
-let isOff = false;
+let isOff = true;
 let buttonIDs = ["up", "right", "down", "left"];
 let strict = false;
 let counterButton = document.getElementById("counter");
 let startButton = document.getElementById("start");
 let strictButton = document.getElementById("strict");
+let onButton = document.getElementById("on-off");
 
 let buttons = {};
 for(let id of buttonIDs) {
@@ -29,46 +30,56 @@ for(let id of buttonIDs) {
 }
 
 function playStrict() {
-  strict = !strict;
-  if (strict) {
-    strictButton.style.filter = "brightness(140%)";
-  } else {
-    strictButton.style.filter = "brightness(100%)";
+  if (!isOff) {
+    strict = !strict;
+    if (strict) {
+      strictButton.style.filter = "brightness(140%)";
+    } else {
+      strictButton.style.filter = "brightness(100%)";
+    }
+    playWinTheme();
   }
-  playWinTheme();
 }
 
-function playSound1() {
-  buttons["up"].style.filter = "brightness(140%)";
-  Sound1.currentTime = 0;
-  Sound1.play();
-  setTimeout(function() {
-    buttons["up"].style.filter = "brightness(100%)";
-  }, 500);
+function playSound1(delay=500) {
+  if (!isOff) {
+    buttons["up"].style.filter = "brightness(140%)";
+    Sound1.currentTime = 0;
+    Sound1.play();
+    setTimeout(function() {
+      buttons["up"].style.filter = "brightness(100%)";
+    }, delay);
+  }
 }
-function playSound2() {
-  buttons["down"].style.filter = "brightness(250%)";
-  Sound2.currentTime = 0;
-  Sound2.play();
-  setTimeout(function() {
-    buttons["down"].style.filter = "brightness(100%)";
-  }, 500);
+function playSound2(delay=500) {
+  if (!isOff) {
+    buttons["down"].style.filter = "brightness(250%)";
+    Sound2.currentTime = 0;
+    Sound2.play();
+    setTimeout(function() {
+      buttons["down"].style.filter = "brightness(100%)";
+    }, delay);
+  }
 }
-function playSound3() {
-  buttons["left"].style.filter = "brightness(250%)";
-  Sound3.currentTime = 0;
-  Sound3.play();
-  setTimeout(function() {
-    buttons["left"].style.filter = "brightness(100%)";
-  }, 500);
+function playSound3(delay=500) {
+  if (!isOff) {
+    buttons["left"].style.filter = "brightness(250%)";
+    Sound3.currentTime = 0;
+    Sound3.play();
+    setTimeout(function() {
+      buttons["left"].style.filter = "brightness(100%)";
+    }, delay);
+  }
 }
-function playSound4() {
-  buttons["right"].style.filter = "brightness(250%)";
-  Sound4.currentTime = 0;
-  Sound4.play();
-  setTimeout(function() {
-    buttons["right"].style.filter = "brightness(100%)";
-  }, 500);
+function playSound4(delay=500) {
+  if (!isOff) {
+    buttons["right"].style.filter = "brightness(250%)";
+    Sound4.currentTime = 0;
+    Sound4.play();
+    setTimeout(function() {
+      buttons["right"].style.filter = "brightness(100%)";
+    }, delay);
+  }
 }
 
 function lightUpButtons(IDs, delay=500){
@@ -87,7 +98,7 @@ function lightUpButtons(IDs, delay=500){
 let playSound = {"up": playSound1, "down": playSound2, "left": playSound3, "right": playSound4};
 
 function initializeSimon() {
-  isOff = !isOff;
+
   if (isOff) {
     let updown = ["up", "down"];
     let rightleft = ["right", "left"];
@@ -95,12 +106,14 @@ function initializeSimon() {
       [updown, rightleft, updown, rightleft, "all"]);
     let delay = 0;
     counterButton.innerHTML = "--";
+    onButton.style.filter = "brightness(140%)";
+
     for (let i=0; i<sequence.length;i++){
       setTimeout(function() {
         id = sequence[i];
         if (id === "all") {
-          lightUpButtons(buttonIDs, 1000);
           counterButton.innerHTML = "0";
+          lightUpButtons(buttonIDs, 1000);
         } else {
           lightUpButtons(id, 100);
         }
@@ -110,6 +123,7 @@ function initializeSimon() {
   } else {
     turnOffSimon();
   }
+  isOff = !isOff;
 }
 
 function turnOffSimon() {
@@ -119,14 +133,16 @@ function turnOffSimon() {
   }, 1000);
   strictButton.style.filter = "brightness(100%)";
   startButton.style.filter = "brightness(100%)";
+  onButton.style.filter = "brightness(100%)";
 }
 
 function startGame() {
-  startButton.style.filter = "brightness(140%)";
-  button_sequence = getRandomButtonSequence(maximumNumberOfBeats);
-  updateCounter(0);
-  playSoundSequence(numberOfPlayedBeats);
-
+  if (!isOff) {
+    startButton.style.filter = "brightness(140%)";
+    button_sequence = getRandomButtonSequence(maximumNumberOfBeats);
+    updateCounter(0);
+    playSoundSequence(numberOfPlayedBeats);
+  }
 }
 
 // Select a sequence randomly
@@ -177,14 +193,16 @@ function playWinTheme() {
   let delay_times = [0, 200, 400, 600];
   for (let i=0; i<sequence.length; i++) {
     setTimeout(function() {
-      playSound[sequence[i]]();
+      playSound[sequence[i]](150);
     }, delay_times[i]);
   }
 }
 
 function playWrong() {
-  lightUpButtons(buttonIDs, 700);
-  wrong.play();
+  if (!isOff) {
+    lightUpButtons(buttonIDs, 700);
+    wrong.play();
+  }
 }
 
 function getRandomButtonSequence(size) {
