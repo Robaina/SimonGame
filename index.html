@@ -38,7 +38,7 @@
 		Your browser does not support the audio element.
 	</audio>
 
-	<div class="button-container">
+	<div class="simon-game">
 		<button class="button" id="up" onclick="playSound1()" ontouch="playSound1()"></button>
 
 		<button class="button" id="down" onclick="playSound2()" ontouch="playSound2()"></button>
@@ -49,10 +49,14 @@
 
 		<button class="circle" id="circle">Simon</button>
 
-		<button class="start-button" id="start" onclick="playSoundSequence()" ontouch="playSoundSequence()"></button>
+    <div class="button-panel">
+    	<button class="start-button" id="start" onclick="playSoundSequence()" ontouch="playSoundSequence()"></button>
+			<button id="counter">--</button>
+    </div>
+
 	</div>
 
-	<button class="full-screen" id="full-screen" onclick="openFullscreen()" ontouch="openFullscreen()">Fullscreen</button>
+	<!-- <button class="full-screen" id="full-screen" onclick="openFullscreen()" ontouch="openFullscreen()">Fullscreen</button> -->
 
 
 <!-- GitHub ribbon by Tim Holman (http://tholman.com) -->

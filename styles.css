@@ -6,7 +6,7 @@ body, html {
     overflow: hidden;
     background-color: rgb(40, 40, 40);
 }
-.button-container {
+.simon-game {
   position: absolute;
   /* vertical-align: middle; */
   top: 50%;
@@ -27,9 +27,9 @@ body, html {
   background-color: inherit;
 
   border-top-right-radius: 50vmin;
-  border: 6vmin solid;
-  border-bottom: 4vmin solid;
-  border-left: 4vmin solid;
+  border: 5vmin solid;
+  border-bottom: 3vmin solid;
+  border-left: 3vmin solid;
 
   display: inline-grid;
   margin: none;
@@ -73,39 +73,66 @@ body, html {
 .circle {
     /* border: 10vmin solid rgb(159, 159, 159); */
     border-radius: 50%;
-    border-color: transparent;
+    border: 2vmin solid rgb(0, 0, 0);
+    background-color: rgb(75, 75, 75);
+
     font-size: 9vmin;
     font-family: "Lucida Console", monospace;
-    padding-bottom: 6vmin;
+    padding-bottom: 8vmin;
     color: rgb(223, 223, 223);
     height: 36%;
     width: 36%;
     position: absolute;
     top: 31%;
     left: 32%;
-    background-color: rgb(0, 0, 0);
     user-select: none;
     outline: none;
     z-index: 0;
 }
+.button-panel {
+  position: absolute;
+  width: 25%;
+  height: 13%;
+  top: 50%;
+  left: 38%;
+  z-index: 1;
+}
 .start-button {
-  /* border: 10vmin solid rgb(159, 159, 159); */
   border-radius: 50%;
   border-color: transparent;
   font-size: 1vmin;
-  font-family: "Lucida Console", monospace;
+  /* font-family: "Lucida Console", monospace; */
   padding-left: 1vmin;
   color: rgb(223, 223, 223);
-  height: 5%;
-  width: 5%;
+  height: 39%;
+  width: 20%;
   position: absolute;
-  top: 54%;
-  left: 54%;
-  background-color: rgb(62, 179, 164);
+  top: 24%;
+  left: 64%;
+  background-color: rgb(62, 179, 87);
   cursor: pointer;
   user-select: none;
   outline: none;
   z-index: 1;
+}
+#counter {
+  position: absolute;
+  width: 30%;
+  height: 50%;
+  top: 20%;
+  left: 6%;
+  background-color: rgb(48, 48, 48);
+  border-radius: 10%;
+  font-family: "digital-font";
+  font-size: 1.7em;
+  color: rgb(213, 6, 6);
+  text-align: center;
+  user-select: none;
+  outline: none;
+}
+@font-face{
+ font-family:"digital-font";
+ src: url("fonts/digital-font.ttf");
 }
 .full-screen {
   padding: 1vmin;

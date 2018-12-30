@@ -1,5 +1,6 @@
 /* Simon's game
    Semidan Robaina Estevez
+   Digital font by Jakob Fischer www.pizzadude.dk
 */
 
 let Sound1 = document.getElementById("Sound1");
