@@ -47,11 +47,18 @@
 
 		<button class="button" id="right" onclick="playSound4()" ontouch="playSound4()"></button>
 
-		<button class="circle" id="circle">Simon</button>
+		<button class="circle" id="circle">Simon<p style="font-size: 2vmin; display: inline">&copy;</p></button>
 
     <div class="button-panel">
+			<p id="start-text">Start/On</p>
     	<button class="start-button" id="start" onclick="playSoundSequence()" ontouch="playSoundSequence()"></button>
-			<button id="counter">--</button>
+
+			<p id="strict-text">Strict</p>
+      <button class="start-button" id="strict" onclick="playStrict()" ontouch="playStrict()"></button>
+
+			<!-- <button class="start-button" id="LED"></button> -->
+      <p id="counter-text">Counter</p>
+			<button class="counter">20</button>
     </div>
 
 	</div>

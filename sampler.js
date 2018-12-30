@@ -13,6 +13,7 @@ let numberOfBits = 6;
 let counter, button_sequence;
 let pressedStart = false;
 let buttonIDs = ["up", "down", "left", "right"];
+let strict = false;
 
 let buttons = {};
 for(let id of buttonIDs) {
@@ -20,6 +21,16 @@ for(let id of buttonIDs) {
   elem.addEventListener("click", checkOrder);
   elem.addEventListener("touch", checkOrder);
   buttons[id] = elem;
+}
+
+function playStrict() {
+  strict = !strict;
+  let strictButton = document.getElementById("strict");
+  if (strict) {
+    strictButton.style.filter = "brightness(140%)";
+  } else {
+    strictButton.style.filter = "brightness(100%)";
+  }
 }
 
 function playSound1() {
