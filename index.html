@@ -12,46 +12,29 @@
 	<title>Simon</title>
 	<link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon.png">
   <link rel="stylesheet" href="styles.css">
-	<link href="https://fonts.googleapis.com/css?family=Erica+One" rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Erica+One" rel="stylesheet"> -->
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Erica+One" rel="stylesheet">
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131412021-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-131412021-1');
+	</script>
 
 </head>
 
 <body>
-
-	<!-- <audio id="sound1">
-	  <source src="sounds/sound1.mp3" type="audio/mpeg">
-	  Your browser does not support the audio element.
-	</audio>
-	<audio id="sound2">
-		<source src="sounds/sound2.mp3" type="audio/mpeg">
-		Your browser does not support the audio element.
-	</audio>
-	<audio id="sound3">
-		<source src="sounds/sound3.mp3" type="audio/mpeg">
-		Your browser does not support the audio element.
-	</audio>
-	<audio id="sound4">
-		<source src="sounds/sound4.mp3" type="audio/mpeg">
-		Your browser does not support the audio element.
-	</audio>
-	<audio id="wrong">
-		<source src="sounds/wrong.mp3" type="audio/mpeg">
-		Your browser does not support the audio element.
-	</audio>
-	<audio id="win">
-		<source src="sounds/win.mp3" type="audio/mpeg">
-		Your browser does not support the audio element.
-	</audio>
-	<audio id="intro">
-		<source src="sounds/intro.mp3" type="audio/mpeg">
-		Your browser does not support the audio element.
-	</audio> -->
 
 	<audio id="sound1" src="sounds/sound1.mp3"></audio>
 	<audio id="sound2" src="sounds/sound2.mp3"></audio>
 	<audio id="sound3" src="sounds/sound3.mp3"></audio>
 	<audio id="sound4" src="sounds/sound4.mp3"></audio>
 	<audio id="win" src="sounds/win.mp3"></audio>
+	<audio id="wrong" src="sounds/wrong.mp3"></audio>
 	<audio id="intro" src="sounds/intro.mp3"></audio>
 
 	<div class="simon-game">
@@ -76,12 +59,15 @@
 			<p id="on-off-text">On/Off</p>
       <button class="start-button" id="on-off" onclick="initializeSimon()" ontouch="initializeSimon()"></button>
 
-			<!-- <button class="start-button" id="LED"></button> -->
       <p id="counter-text">Counter</p>
 			<button class="counter" id="counter"></button>
     </div>
 
 	</div>
+
+	<footer id="name">
+		<a href="https://github.com/Robaina" id="name-text">Semidán Robaina Estévez, 2018</a>
+	</footer>
 
 	<!-- <button class="full-screen" id="full-screen" onclick="openFullscreen()" ontouch="openFullscreen()">Fullscreen</button> -->
 

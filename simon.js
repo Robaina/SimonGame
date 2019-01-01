@@ -216,7 +216,7 @@ function checkOrder(event) {
             return;
           }
           if (correct_counts === n_beats) {
-            setTimeout(mainGame, 1000);
+            setTimeout(mainGame, 1500);
             return;
           }
 
