@@ -48,6 +48,7 @@ p {
   border-color: rgb(0, 0, 0);
   background-color: rgb(74, 162, 76);
   transform:rotate(-45deg);
+  -webkit-transform:rotate(-45deg);
 }
 #down {
   left: 25%;
@@ -55,6 +56,7 @@ p {
   border-color: rgb(0, 0, 0);
   background-color: rgb(18, 130, 159);
   transform:rotate(135deg);
+  -webkit-transform:rotate(135deg);
 }
 #left {
   left: -10%;
@@ -62,13 +64,15 @@ p {
   border-color: rgb(0, 0, 0);
   background-color: rgb(159, 163, 51);
   transform:rotate(-135deg);
+  -webkit-transform:rotate(-135deg);
 }
-#right {;
+#right {
   left: 60%;
   top: 25%;
   border-color: rgb(0, 0, 0);
   background-color: rgb(156, 28, 28);
   transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
 }
 .circle {
   border-radius: 50%;
