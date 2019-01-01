@@ -104,33 +104,36 @@ function initializeSimon() {
   isOff = !isOff;
   if (!isOff) {
     correct_counts = 0;
-    let updown = ["up", "down"];
-    let rightleft = ["right", "left"];
-    let sequence = buttonIDs.concat(buttonIDs).concat([updown, rightleft]);
-    let delay = 0;
-    counterButton.innerHTML = "--";
     onButton.style["background-color"] = "rgb(115, 213, 55)";
+    playIntro();
+    setTimeout(standBySimon, 2500);
 
-    intro.play();
-
-    for (let i=0; i<sequence.length;i++){
-      setTimeout(function() {
-        id = sequence[i];
-        if (id === "all") {
-          counterButton.innerHTML = "0";
-          lightUpButtons(buttonIDs, 700);
-        } else {
-          lightUpButtons(id, 100);
-        }
-      }, delay);
-      delay += 200;
-    }
   } else {
     turnOffSimon();
-    // isOff = !isOff;
     return;
   }
-  // isOff = !isOff;
+}
+
+function playIntro() {
+  let updown = ["up", "down"];
+  let rightleft = ["right", "left"];
+  let sequence = buttonIDs.concat(buttonIDs).concat([updown, rightleft]);
+  let delay = 0;
+
+  intro.play();
+  for (let i=0; i<sequence.length;i++){
+    setTimeout(function() {
+      id = sequence[i];
+      lightUpButtons(id, 100);
+    }, delay);
+    delay += 200;
+  }
+}
+
+function standBySimon() {
+  startButton.style['animation-iteration-count'] = "infinite";
+  counterButton.innerHTML = "--";
+
 }
 
 function turnOffSimon() {
@@ -139,6 +142,7 @@ function turnOffSimon() {
     counterButton.innerHTML = "";
   }, 1000);
   strictButton.style["background-color"] = "rgb(129, 129, 129)";
+  startButton.style['animation-iteration-count'] = 0;
   startButton.style["background-color"] = "rgb(129, 129, 129)";
   onButton.style["background-color"] = "rgb(129, 129, 129)";
 }
@@ -148,6 +152,7 @@ function startGame() {
     n_beats = 0;
     correct_counts = 0;
     startButton.style["background-color"] = "rgb(115, 213, 55)";
+    startButton.style['animation-iteration-count'] = 0;
     button_sequence = getRandomButtonSequence(maximumNumberOfBeats);
     setTimeout(mainGame, 1000);
   }
@@ -192,7 +197,7 @@ function checkOrder(event) {
         if (event.target.id !== buttonID) {
           playWrong();
           if (strict) {
-            setTimeout(startGame, 1000);
+            setTimeout(standBySimon, 3000);
             return;
           } else {
              n_beats--;
@@ -205,6 +210,7 @@ function checkOrder(event) {
 
           if (correct_counts === maximumNumberOfBeats) {
             playWinTheme();
+            setTimeout(standBySimon, 3000);
             return;
           }
           if (correct_counts === n_beats) {
