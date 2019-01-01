@@ -9,7 +9,7 @@ let sound4 = document.getElementById("sound4");
 let wrong = document.getElementById("wrong");
 let win = document.getElementById("win");
 let intro = document.getElementById("intro");
-let maximumNumberOfBeats = 4;
+let maximumNumberOfBeats = 20;
 let numberOfPlayedBeats = 1;
 let button_sequence;
 let sequence_ended = false;
