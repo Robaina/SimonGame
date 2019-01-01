@@ -1,18 +1,19 @@
 /* Simon's game
    Semidan Robaina Estevez
-   Digital font by Jakob Fischer www.pizzadude.dk
 */
 
-let Sound1 = document.getElementById("Sound1");
-let Sound2 = document.getElementById("Sound2");
-let Sound3 = document.getElementById("Sound3");
-let Sound4 = document.getElementById("Sound4");
+let sound1 = document.getElementById("sound1");
+let sound2 = document.getElementById("sound2");
+let sound3 = document.getElementById("sound3");
+let sound4 = document.getElementById("sound4");
 let wrong = document.getElementById("wrong");
+let win = document.getElementById("win");
+let intro = document.getElementById("intro");
 let numberOfBeats = 6;
-let maximumNumberOfBeats = 10;
+let maximumNumberOfBeats = 4;
 let numberOfPlayedBeats = 1;
-let counter, button_sequence;
-let pressedStart = false;
+let button_sequence;
+let sequence_ended = false;
 let isOff = true;
 let buttonIDs = ["up", "right", "down", "left"];
 let strict = false;
@@ -20,9 +21,12 @@ let counterButton = document.getElementById("counter");
 let startButton = document.getElementById("start");
 let strictButton = document.getElementById("strict");
 let onButton = document.getElementById("on-off");
+let n_beats;
+let current_sequence;
+
 
 let buttons = {};
-for(let id of buttonIDs) {
+for (let id of buttonIDs) {
   let elem = document.getElementById(id);
   elem.addEventListener("click", checkOrder);
   elem.addEventListener("touch", checkOrder);
@@ -33,19 +37,18 @@ function playStrict() {
   if (!isOff) {
     strict = !strict;
     if (strict) {
-      strictButton.style.filter = "brightness(140%)";
+      strictButton.style["background-color"] = "rgb(115, 213, 55)";
     } else {
-      strictButton.style.filter = "brightness(100%)";
+      strictButton.style["background-color"] = "rgb(129, 129, 129)";
     }
-    playWinTheme();
   }
 }
 
 function playSound1(delay=500) {
   if (!isOff) {
     buttons["up"].style.filter = "brightness(140%)";
-    Sound1.currentTime = 0;
-    Sound1.play();
+    sound1.currentTime = 0;
+    sound1.play();
     setTimeout(function() {
       buttons["up"].style.filter = "brightness(100%)";
     }, delay);
@@ -54,8 +57,8 @@ function playSound1(delay=500) {
 function playSound2(delay=500) {
   if (!isOff) {
     buttons["down"].style.filter = "brightness(250%)";
-    Sound2.currentTime = 0;
-    Sound2.play();
+    sound2.currentTime = 0;
+    sound2.play();
     setTimeout(function() {
       buttons["down"].style.filter = "brightness(100%)";
     }, delay);
@@ -64,8 +67,8 @@ function playSound2(delay=500) {
 function playSound3(delay=500) {
   if (!isOff) {
     buttons["left"].style.filter = "brightness(250%)";
-    Sound3.currentTime = 0;
-    Sound3.play();
+    sound3.currentTime = 0;
+    sound3.play();
     setTimeout(function() {
       buttons["left"].style.filter = "brightness(100%)";
     }, delay);
@@ -74,8 +77,8 @@ function playSound3(delay=500) {
 function playSound4(delay=500) {
   if (!isOff) {
     buttons["right"].style.filter = "brightness(250%)";
-    Sound4.currentTime = 0;
-    Sound4.play();
+    sound4.currentTime = 0;
+    sound4.play();
     setTimeout(function() {
       buttons["right"].style.filter = "brightness(100%)";
     }, delay);
@@ -98,22 +101,24 @@ function lightUpButtons(IDs, delay=500){
 let playSound = {"up": playSound1, "down": playSound2, "left": playSound3, "right": playSound4};
 
 function initializeSimon() {
-
-  if (isOff) {
+  isOff = !isOff;
+  if (!isOff) {
+    correct_counts = 0;
     let updown = ["up", "down"];
     let rightleft = ["right", "left"];
-    let sequence = buttonIDs.concat(buttonIDs).concat(buttonIDs).concat(
-      [updown, rightleft, updown, rightleft, "all"]);
+    let sequence = buttonIDs.concat(buttonIDs).concat([updown, rightleft]);
     let delay = 0;
     counterButton.innerHTML = "--";
-    onButton.style.filter = "brightness(140%)";
+    onButton.style["background-color"] = "rgb(115, 213, 55)";
+
+    intro.play();
 
     for (let i=0; i<sequence.length;i++){
       setTimeout(function() {
         id = sequence[i];
         if (id === "all") {
           counterButton.innerHTML = "0";
-          lightUpButtons(buttonIDs, 1000);
+          lightUpButtons(buttonIDs, 700);
         } else {
           lightUpButtons(id, 100);
         }
@@ -122,8 +127,10 @@ function initializeSimon() {
     }
   } else {
     turnOffSimon();
+    // isOff = !isOff;
+    return;
   }
-  isOff = !isOff;
+  // isOff = !isOff;
 }
 
 function turnOffSimon() {
@@ -131,35 +138,83 @@ function turnOffSimon() {
   setTimeout(function() {
     counterButton.innerHTML = "";
   }, 1000);
-  strictButton.style.filter = "brightness(100%)";
-  startButton.style.filter = "brightness(100%)";
-  onButton.style.filter = "brightness(100%)";
+  strictButton.style["background-color"] = "rgb(129, 129, 129)";
+  startButton.style["background-color"] = "rgb(129, 129, 129)";
+  onButton.style["background-color"] = "rgb(129, 129, 129)";
 }
 
 function startGame() {
   if (!isOff) {
-    startButton.style.filter = "brightness(140%)";
+    n_beats = 0;
+    correct_counts = 0;
+    startButton.style["background-color"] = "rgb(115, 213, 55)";
     button_sequence = getRandomButtonSequence(maximumNumberOfBeats);
-    updateCounter(0);
-    playSoundSequence(numberOfPlayedBeats);
+    setTimeout(mainGame, 1000);
   }
 }
 
-// Select a sequence randomly
-function playSoundSequence(n_beats) {
-  pressedStart = true;
-  let delay = 0;
-  counter = 0;
+function mainGame() {
+  n_beats++;
+  correct_counts = 0;
+  current_sequence = button_sequence.slice(0, n_beats);
+  updateCounter(n_beats);
+  playSoundSequence(current_sequence);
+}
 
-  for (let i=0; i<n_beats; i++) {
-    let id = button_sequence[i];
+// Select a sequence randomly
+function playSoundSequence(sequence) {
+  sequence_ended = false;
+  let delay = 0;
+
+  for (let i=0; i<sequence.length; i++) {
+    let id = sequence[i];
+
     setTimeout(function() {
       playSound[id]();
-      counter++;
-      updateCounter(counter);
+      if (i === sequence.length - 1) {
+        sequence_ended = true;
+      }
     }, delay);
 
     delay += 600;
+  }
+}
+
+let correct_counts;
+// probably you can use switch/case
+function checkOrder(event) {
+  if (!isOff) {
+    if (sequence_ended) {
+      let buttonID = current_sequence.shift();
+
+      if (typeof buttonID !== "undefined") {
+
+        if (event.target.id !== buttonID) {
+          playWrong();
+          if (strict) {
+            setTimeout(startGame, 1000);
+            return;
+          } else {
+             n_beats--;
+             setTimeout(mainGame, 2000);
+             return;
+          }
+        } else {
+          correct_counts++;
+          updateCounter(correct_counts);
+
+          if (correct_counts === maximumNumberOfBeats) {
+            playWinTheme();
+            return;
+          }
+          if (correct_counts === n_beats) {
+            setTimeout(mainGame, 1000);
+            return;
+          }
+
+        }
+      }
+    }
   }
 }
 
@@ -167,33 +222,12 @@ function updateCounter(counter) {
   counterButton.innerHTML = counter.toString();
 }
 
-function checkOrder(event) {
-  // checks whether user follows correct order
-  if (pressedStart){
-    let correct_counts = 0;
-    let buttonID = button_sequence.shift();
-
-    if (typeof buttonID !== "undefined") {
-
-      if (event.target.id !== buttonID) {
-        playWrong();
-      } else {correct_counts++}
-
-    } else {
-      pressedStart = false;
-      if (correct_counts === numberOfBeats) {Sound4.play()}
-    }
-
-
-  }
-}
-
 function playWinTheme() {
-  let sequence = ["right", "down", "up", "left"];
-  let delay_times = [0, 200, 400, 600];
-  for (let i=0; i<sequence.length; i++) {
+  let delay_times = [0, 600, 1200];
+  win.play();
+  for (let i=0; i<delay_times.length; i++) {
     setTimeout(function() {
-      playSound[sequence[i]](150);
+      lightUpButtons(buttonIDs, 400);
     }, delay_times[i]);
   }
 }

@@ -13,9 +13,8 @@ p {
 }
 .simon-game {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 3vw;
+  top: calc( (100vh - 95vmin) / 2 );
+  left: calc( (100vw - 95vmin) / 2 );
   width: 95vmin;
   height: 95vmin;
   background-color: inherit;
@@ -29,6 +28,7 @@ p {
   width: 50%;
   height: 50%;
   background-color: inherit;
+  -webkit-tap-highlight-color: transparent;
 
   border-top-right-radius: 50vmin;
   border: 4vmin solid;
@@ -75,10 +75,10 @@ p {
   border: 2.5vmin solid rgb(0, 0, 0);
   background-color: rgb(85, 85, 85);
 
-  font-size: 11.5vmin;
-  font-family: fantasy, monospace;
+  font-size: 9.9vmin;
+  font-family: 'Erica One', cursive;
   padding-bottom: 14vmin;
-  padding-left: 2.5vmin;
+  padding-left: 1.5vmin;
   color: rgb(223, 223, 223);
   height: 44%;
   width: 44%;
@@ -93,19 +93,22 @@ p {
   position: absolute;
   width: 25%;
   height: 20%;
-  top: 46%;
+  top: 45%;
   left: 37.5%;
   z-index: 1;
 }
 .start-button {
   border-radius: 50%;
-  border-color: transparent;
+  border: 0.5vmin solid rgb(68, 68, 68);
+  /* border-color: transparent; */
   font-size: 1vmin;
   padding-left: 1vmin;
   color: rgb(223, 223, 223);
-  background-color: rgb(156, 28, 28);
+  /* background-color: rgb(156, 28, 28); */
+  background-color: rgb(129, 129, 129);
+  -webkit-tap-highlight-color: transparent;
   height: 30%;
-  width: 23%;
+  width: 24%;
   position: absolute;
   cursor: pointer;
   user-select: none;
@@ -148,6 +151,7 @@ p {
   border: 0;
   background-color: rgb(48, 48, 48);
   border-radius: 10%;
+  border: 0.3vmin solid rgb(136, 136, 136);
   font-family: "digital-font";
   font-size: 4vmin;
   color: rgb(213, 6, 6);
