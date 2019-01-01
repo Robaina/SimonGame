@@ -188,8 +188,8 @@ p {
 }
 #name {
   position: absolute;
-  top: 90%;
-  left: 78%;
+  top: 93vh;
+  left: 70vw;
 }
 #name-text {
   color: rgb(63, 198, 237);
