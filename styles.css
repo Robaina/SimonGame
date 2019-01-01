@@ -126,6 +126,10 @@ p {
 #start {
   top: 45%;
   left: 45%;
+  -webkit-animation-name: blink;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-iteration-count: 0;
+  -webkit-animation-timing-function: linear;
   animation-name: blink;
   animation-duration: 1.5s;
   animation-iteration-count: 0;

@@ -46,10 +46,12 @@ function playStrict() {
 function playSound1(delay=500) {
   if (!isOff) {
     buttons["up"].style.filter = "brightness(140%)";
+    buttons["up"].style["-webkit-filter"] = "brightness(140%)";
     sound1.currentTime = 0;
     sound1.play();
     setTimeout(function() {
       buttons["up"].style.filter = "brightness(100%)";
+      buttons["up"].style["-webkit-filter"] = "brightness(100%)";
     }, delay);
   }
 }
@@ -152,6 +154,7 @@ function startGame() {
     correct_counts = 0;
     startButton.style["background-color"] = "rgb(115, 213, 55)";
     startButton.style['animation-iteration-count'] = 0;
+    startButton.style['-webkit-animation-iteration-count'] = 0;
     counterButton.innerHTML = "--";
     button_sequence = getRandomButtonSequence(maximumNumberOfBeats);
     setTimeout(mainGame, 2000);
