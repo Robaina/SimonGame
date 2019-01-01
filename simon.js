@@ -9,7 +9,7 @@ let sound4 = document.getElementById("sound4");
 let wrong = document.getElementById("wrong");
 let win = document.getElementById("win");
 let intro = document.getElementById("intro");
-let maximumNumberOfBeats = 20;
+let maximumNumberOfBeats = 4;
 let numberOfPlayedBeats = 1;
 let button_sequence;
 let sequence_ended = false;
@@ -152,8 +152,9 @@ function startGame() {
     correct_counts = 0;
     startButton.style["background-color"] = "rgb(115, 213, 55)";
     startButton.style['animation-iteration-count'] = 0;
+    counterButton.innerHTML = "--";
     button_sequence = getRandomButtonSequence(maximumNumberOfBeats);
-    setTimeout(mainGame, 1000);
+    setTimeout(mainGame, 2000);
   }
 }
 
@@ -196,7 +197,7 @@ function checkOrder(event) {
         if (event.target.id !== buttonID) {
           playWrong();
           if (strict) {
-            setTimeout(standBySimon, 3000);
+            setTimeout(standBySimon, 2500);
             return;
           } else {
              n_beats--;
@@ -205,11 +206,10 @@ function checkOrder(event) {
           }
         } else {
           correct_counts++;
-          updateCounter(correct_counts);
 
           if (correct_counts === maximumNumberOfBeats) {
             playWinTheme();
-            setTimeout(standBySimon, 3000);
+            setTimeout(standBySimon, 2500);
             return;
           }
           if (correct_counts === n_beats) {
@@ -239,7 +239,7 @@ function playWinTheme() {
 
 function playWrong() {
   if (!isOff) {
-    lightUpButtons(buttonIDs, 700);
+    lightUpButtons(buttonIDs, 500);
     wrong.play();
   }
 }
