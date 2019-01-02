@@ -197,33 +197,6 @@ p {
   font-size: 2.3vmin;
   text-decoration: none;
 }
-/* .full-screen {
-  padding: 1vmin;
-  font-size: 2.5vmin;
-  border: 0;
-  color: white;
-  text-align: center;
-  display: block;
-  margin: 1vmin 0em;
-  cursor: pointer;
-  border-radius: 1vmax;
-  user-select: none;
-  outline: none;
-  box-shadow: 0 0.5vmax rgb(221, 221, 221);
-
-  position: relative;
-  top: 0em;
-  left: 0%;
-  width: 20vw;
-  height: 5vw;
-  border-top: 1em;
-  background-color: rgb(159, 159, 159);
-}
-.full-screen:active {
-  box-shadow: 0 0.3vmax rgb(102, 102, 102);
-  background-color: rgb(12, 165, 170);
-  transform: translateY(4px);
-} */
 
 .github-corner:hover .octo-arm {
   animation: octocat-wave 560ms ease-in-out

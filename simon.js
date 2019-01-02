@@ -20,8 +20,7 @@ let counterButton = document.getElementById("counter");
 let startButton = document.getElementById("start");
 let strictButton = document.getElementById("strict");
 let onButton = document.getElementById("on-off");
-let n_beats;
-let current_sequence;
+let n_beats, current_sequence, soundSequence;
 
 
 let buttons = {};
@@ -157,6 +156,7 @@ function startGame() {
     startButton.style['-webkit-animation-iteration-count'] = 0;
     counterButton.innerHTML = "--";
     button_sequence = getRandomButtonSequence(maximumNumberOfBeats);
+    clearTimeout(soundSequence);
     setTimeout(mainGame, 2000);
   }
 }
@@ -177,7 +177,7 @@ function playSoundSequence(sequence) {
   for (let i=0; i<sequence.length; i++) {
     let id = sequence[i];
 
-    setTimeout(function() {
+    soundSequence = setTimeout(function() {
       playSound[id]();
       if (i === sequence.length - 1) {
         sequence_ended = true;
@@ -264,33 +264,3 @@ function getRandomButtonSequence(size) {
   }
   return button_sequence
 }
-
-// function openFullscreen() {
-//   fullScreen = !fullScreen;
-//   fullScreenButton = document.getElementById("full-screen");
-//   let elem = document.documentElement;
-//
-//   if (fullScreen) {
-//     fullScreenButton.style["background-color"] = "rgb(12, 165, 170)";
-//     if (elem.requestFullscreen) {
-//       elem.requestFullscreen();
-//     } else if (elem.mozRequestFullScreen) {
-//       elem.mozRequestFullScreen();
-//     } else if (elem.webkitRequestFullscreen) {
-//       elem.webkitRequestFullscreen();
-//     } else if (elem.msRequestFullscreen) {
-//       elem.msRequestFullscreen();
-//     }
-//   } else {
-//     fullScreenButton.style["background-color"] = "rgb(159, 159, 159)";
-//     if (document.exitFullscreen) {
-//         document.exitFullscreen();
-//     } else if (document.webkitExitFullscreen) {
-//         document.webkitExitFullscreen();
-//     } else if (document.mozCancelFullScreen) {
-//         document.mozCancelFullScreen();
-//     } else if (document.msExitFullscreen) {
-//         document.msExitFullscreen();
-//     }
-//   }
-// }
