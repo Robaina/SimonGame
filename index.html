@@ -36,32 +36,36 @@
 	<audio id="wrong" src="sounds/wrong.mp3"></audio>
 	<audio id="intro" src="sounds/intro.mp3"></audio>
 
-	<div class="simon-game">
+	<div class="container">
 
-		<button class="button" id="up" onclick="playSound1()" ontouch="playSound1()"></button>
+		<div class="simon-game">
 
-		<button class="button" id="down" onclick="playSound2()" ontouch="playSound2()"></button>
+			<button class="button" id="up" onclick="playSound1()" ontouch="playSound1()"></button>
 
-		<button class="button" id="left" onclick="playSound3()" ontouch="playSound3()"></button>
+			<button class="button" id="down" onclick="playSound2()" ontouch="playSound2()"></button>
 
-		<button class="button" id="right" onclick="playSound4()" ontouch="playSound4()"></button>
+			<button class="button" id="left" onclick="playSound3()" ontouch="playSound3()"></button>
 
-		<button class="circle" id="circle">Simon<p style="font-size: 2vmin; display: inline">&copy;</p></button>
+			<button class="button" id="right" onclick="playSound4()" ontouch="playSound4()"></button>
 
-    <div class="button-panel">
-			<p id="start-text">Start</p>
-    	<button class="start-button" id="start" onclick="startGame()" ontouch="startGame()"></button>
+			<button class="circle" id="circle">Simon<p style="font-size: 2vmin; display: inline">&copy;</p></button>
 
-			<p id="strict-text">Strict</p>
-      <button class="start-button" id="strict" onclick="playStrict()" ontouch="playStrict()"></button>
+	    <div class="button-panel">
+				<p id="start-text">Start</p>
+	    	<button class="start-button" id="start" onclick="startGame()" ontouch="startGame()"></button>
 
-			<p id="on-off-text">On/Off</p>
-      <button class="start-button" id="on-off" onclick="initializeSimon()" ontouch="initializeSimon()"></button>
+				<p id="strict-text">Strict</p>
+	      <button class="start-button" id="strict" onclick="playStrict()" ontouch="playStrict()"></button>
 
-      <p id="counter-text">Counter</p>
-			<button class="counter" id="counter"></button>
-    </div>
+				<p id="on-off-text">On/Off</p>
+	      <button class="start-button" id="on-off" onclick="initializeSimon()" ontouch="initializeSimon()"></button>
 
+	      <p id="counter-text">Counter</p>
+				<button class="counter" id="counter"></button>
+	    </div>
+
+		</div>
+		
 	</div>
 
 	<footer id="name">

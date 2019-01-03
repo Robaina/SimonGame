@@ -151,12 +151,12 @@ function startGame() {
   if (!isOff) {
     n_beats = 0;
     correct_counts = 0;
+    clearTimeout(soundSequence);
     startButton.style["background-color"] = "rgb(115, 213, 55)";
     startButton.style['animation-iteration-count'] = 0;
     startButton.style['-webkit-animation-iteration-count'] = 0;
     counterButton.innerHTML = "--";
     button_sequence = getRandomButtonSequence(maximumNumberOfBeats);
-    clearTimeout(soundSequence);
     setTimeout(mainGame, 2000);
   }
 }

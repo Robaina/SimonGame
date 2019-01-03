@@ -3,7 +3,6 @@ body, html {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: rgb(40, 40, 40);
 }
 p {
@@ -21,6 +20,7 @@ p {
   margin: 0;
   border: 0;
   padding: 0;
+  overflow: hidden;
 }
 .button {
   position: absolute;
