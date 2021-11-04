@@ -223,6 +223,9 @@ p {
 }
 
 @media (max-width:500px) {
+    html, body {
+        overflow-x: hidden;
+    }
   .github-corner:hover .octo-arm {
     animation: none
   }
